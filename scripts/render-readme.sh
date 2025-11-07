@@ -4,28 +4,57 @@ set -euo pipefail
 OWNER=regenrek
 ORG=instructa
 
-# Fetch all personal repos
+# Fetch personal repos (all)
 PERSONAL=$(gh repo list "$OWNER" --limit 400 --json name,stargazerCount,description,url,primaryLanguage \
   --jq 'map({name,stars:.stargazerCount,desc:(.description // ""),url,lang:(.primaryLanguage.name // "")})')
 
-# Must-haves in fixed order (deepwiki-mcp last)
-MUST_JSON=$(jq -n --argjson all "$PERSONAL" '["codefetch","aidex","oplink","deepwiki-mcp"] as $o | [ $o[] as $n | ($all[] | select(.name==$n)) ]')
+# Fetch instructa repos (all public)
+INSTRUCTA_ALL=$(gh repo list "$ORG" --limit 400 --json name,stargazerCount,description,url,primaryLanguage,isPrivate \
+  --jq 'map(select(.isPrivate==false)) | map({name,stars:.stargazerCount,desc:(.description // ""),url,lang:(.primaryLanguage.name // "")})')
 
-# OPLink-related repos (oplink and oplink-*)
-OPLINK=$(echo "$PERSONAL" | jq '[.[] | select(.name | test("^oplink($|-)"))]')
+# Keep both for lookup (prefer instructa when duplicate names exist)
 
-# Instructa top 8 public
-INSTRUCTA=$(gh repo list "$ORG" --limit 400 --json name,stargazerCount,description,url,primaryLanguage,isPrivate \
-  --jq 'map(select(.isPrivate==false)) | sort_by(.stargazerCount) | reverse | .[0:8] | map({name,stars:.stargazerCount,desc:(.description // ""),url,lang:(.primaryLanguage.name // "")})')
-
-render_table(){
-  # prints a markdown table from JSON array of {name, url, desc, stars}
+# Helpers
+table_header(){
   echo "| Name | Description | Stars |"
   echo "|---|---|---|"
-  jq -r '.[] |
-    "| [\(.name)](\(.url)) | " +
-    (.desc | gsub("\n"; " ") | gsub("\\|"; "\\|")) +
-    " | " + ("\(.stars)") + " |"'
+}
+
+map_alias(){
+  case "$1" in
+    "constructer-starter") echo "constructa-starter" ;;
+    "codex 1-up") echo "codex-1up" ;;
+    *) echo "$1" ;;
+  esac
+}
+
+render_row(){
+  local name="$1"; shift || true
+  local tag="${1:-}"
+  local canon
+  canon=$(map_alias "$name")
+  jq -nr --argjson instr "$INSTRUCTA_ALL" --argjson pers "$PERSONAL" --arg name "$canon" --arg tag "$tag" '
+    ( ($instr | map(select(.name==$name))) + ($pers | map(select(.name==$name))) ) | .[0] as $r |
+    select($r) |
+    "| [\($r.name)](\($r.url))" + (if $tag=="NEW" then " <sup>NEW</sup>" else "" end) +
+    " | " + ($r.desc // "") +
+    " | " + ($r.stars|tostring) +
+    " |"'
+}
+
+render_section(){
+  local title="$1"; shift
+  echo "## $title"
+  echo
+  table_header
+  for spec in "$@"; do
+    local name tag
+    name="${spec%%:*}"
+    tag="${spec#*:}"
+    if [ "$name" = "$tag" ]; then tag=""; fi
+    render_row "$name" "$tag" || true
+  done
+  echo
 }
 
 {
@@ -44,24 +73,27 @@ Building AI tools to driving my coding agent to the max.
 
 HDR
 
-# New section on top (from OPLink repos)
-if [ "$(echo "$OPLINK" | jq 'length')" -gt 0 ]; then
-cat << 'NEW'
-## New
-NEW
-echo
-render_table <<< "$OPLINK"
-echo
-fi
+# Sections in custom order
+render_section "Starter Kits" \
+  "constructa-starter-min" \
+  "constructer-starter" \
+  "mcp-starter" \
+  "viber3d"
 
-cat << 'PERS'
-## Personal Projects
-PERS
-echo
-render_table <<< "$MUST_JSON"
-cat << 'INSTR'
-## Instructa Highlights
-INSTR
-echo
-render_table <<< "$INSTRUCTA"
+render_section "AI Workflow Tools" \
+  "oplink:NEW" \
+  "browser-echo" \
+  "codefetch" \
+  "aidex"
+
+render_section "MCP Server" \
+  "deepwiki-mcp"
+
+render_section "CLI Tools" \
+  "codex 1-up" \
+  "slash-commands"
+
+render_section "Other" \
+  "ai-prompts" \
+  "planr"
 } > README.md
