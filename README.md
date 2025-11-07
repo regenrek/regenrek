@@ -19,6 +19,12 @@ Building AI tools to driving my coding agent to the max.
 | [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
 | [deepwiki-mcp](https://github.com/regenrek/deepwiki-mcp) | 📖 MCP server for fetch deepwiki.com and get latest knowledge in Cursor and other Code Editors | 1111 |
 
+## OPLink
+
+| Name | Description | Stars |
+|---|---|---|
+| [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
+
 ## Instructa Highlights
 
 | Name | Description | Stars |

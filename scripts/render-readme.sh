@@ -11,6 +11,9 @@ PERSONAL=$(gh repo list "$OWNER" --limit 400 --json name,stargazerCount,descript
 # Must-haves in fixed order (deepwiki-mcp last)
 MUST_JSON=$(jq -n --argjson all "$PERSONAL" '["codefetch","aidex","oplink","deepwiki-mcp"] as $o | [ $o[] as $n | ($all[] | select(.name==$n)) ]')
 
+# OPLink-related repos (oplink and oplink-*)
+OPLINK=$(echo "$PERSONAL" | jq '[.[] | select(.name | test("^oplink($|-)"))]')
+
 # Instructa top 8 public
 INSTRUCTA=$(gh repo list "$ORG" --limit 400 --json name,stargazerCount,description,url,primaryLanguage,isPrivate \
   --jq 'map(select(.isPrivate==false)) | sort_by(.stargazerCount) | reverse | .[0:8] | map({name,stars:.stargazerCount,desc:(.description // ""),url,lang:(.primaryLanguage.name // "")})')
@@ -44,10 +47,17 @@ HDR
 echo
 render_table <<< "$MUST_JSON"
 echo
+if [ "$(echo "$OPLINK" | jq 'length')" -gt 0 ]; then
+cat << 'OPL'
+## OPLink
+OPL
+echo
+render_table <<< "$OPLINK"
+echo
+fi
 cat << 'INSTR'
 ## Instructa Highlights
 INSTR
 echo
 render_table <<< "$INSTRUCTA"
 } > README.md
-
