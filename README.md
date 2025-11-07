@@ -13,16 +13,16 @@ Building AI tools to driving my coding agent to the max.
 ## Personal Projects
 
 | Name | Description | Stars |
-|---|---:|---|
-| [deepwiki-mcp](https://github.com/regenrek/deepwiki-mcp) | 📖 MCP server for fetch deepwiki.com and get latest knowledge in Cursor and other Code Editors | 1111 |
+|---|---|---|
 | [codefetch](https://github.com/regenrek/codefetch) | Turn code into Markdown for LLMs with one simple terminal command | 355 |
 | [aidex](https://github.com/regenrek/aidex) | A CLI tool that provides detailed information about AI language models, helping developers choose the right model for their needs. | 38 |
 | [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
+| [deepwiki-mcp](https://github.com/regenrek/deepwiki-mcp) | 📖 MCP server for fetch deepwiki.com and get latest knowledge in Cursor and other Code Editors | 1111 |
 
 ## Instructa Highlights
 
 | Name | Description | Stars |
-|---|---:|---|
+|---|---|---|
 | [ai-prompts](https://github.com/instructa/ai-prompts) | Curated AI Prompts for Cursor Rules, Cline, Windsurf and Github Copilot | 815 |
 | [viber3d](https://github.com/instructa/viber3d) | A modern starter kit for 3D browser games powered by r3f and threejs -  | 489 |
 | [browser-echo](https://github.com/instructa/browser-echo) | ⚡ Stream browser logs to terminal, zero setup, perfect for Ai Agents | 278 |
@@ -31,13 +31,3 @@ Building AI tools to driving my coding agent to the max.
 | [mcp-starter](https://github.com/instructa/mcp-starter) | A super simple Starter to build your own MCP Server | 30 |
 | [planr](https://github.com/instructa/planr) | Simple Project Planning with AI | 20 |
 | [ai-prompts-mcp](https://github.com/instructa/ai-prompts-mcp) | Model Context Protocl for AI Prompts API | 16 |
-## Activity
-
-![GitHub Contribution Graph](https://ghchart.rshah.org/regenrek)
-
----
-
-<details>
-<summary>How this page works</summary>
-This README is generated via `gh` and `jq`. Update by running `scripts/render-readme.sh`.
-</details>

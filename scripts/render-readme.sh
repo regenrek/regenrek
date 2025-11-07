@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 OWNER=regenrek
 ORG=instructa
 
@@ -7,8 +8,8 @@ ORG=instructa
 PERSONAL=$(gh repo list "$OWNER" --limit 400 --json name,stargazerCount,description,url,primaryLanguage \
   --jq 'map({name,stars:.stargazerCount,desc:(.description // ""),url,lang:(.primaryLanguage.name // "")})')
 
-# Must-haves (ensure these appear; order by stars desc)
-MUST_JSON=$(echo "$PERSONAL" | jq '[.[] | select(.name=="codefetch" or .name=="deepwiki-mcp" or .name=="aidex" or .name=="oplink")] | sort_by(.stars) | reverse')
+# Must-haves in fixed order (deepwiki-mcp last)
+MUST_JSON=$(jq -n --argjson all "$PERSONAL" '["codefetch","aidex","oplink","deepwiki-mcp"] as $o | [ $o[] as $n | ($all[] | select(.name==$n)) ]')
 
 # Instructa top 8 public
 INSTRUCTA=$(gh repo list "$ORG" --limit 400 --json name,stargazerCount,description,url,primaryLanguage,isPrivate \
@@ -17,8 +18,8 @@ INSTRUCTA=$(gh repo list "$ORG" --limit 400 --json name,stargazerCount,descripti
 render_table(){
   # prints a markdown table from JSON array of {name, url, desc, stars}
   echo "| Name | Description | Stars |"
-  echo "|---|---:|---:|" | sed 's/---:/---/2' # keep simple separators
-  jq -r '.[] | 
+  echo "|---|---|---|"
+  jq -r '.[] |
     "| [\(.name)](\(.url)) | " +
     (.desc | gsub("\n"; " ") | gsub("\\|"; "\\|")) +
     " | " + ("\(.stars)") + " |"'
@@ -48,16 +49,5 @@ cat << 'INSTR'
 INSTR
 echo
 render_table <<< "$INSTRUCTA"
-cat << 'FTR'
-## Activity
-
-![GitHub Contribution Graph](https://ghchart.rshah.org/regenrek)
-
----
-
-<details>
-<summary>How this page works</summary>
-This README is generated via `gh` and `jq`. Update by running `scripts/render-readme.sh`.
-</details>
-FTR
 } > README.md
+
