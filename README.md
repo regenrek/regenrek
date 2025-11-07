@@ -10,15 +10,6 @@ Building AI tools to driving my coding agent to the max.
   <a href="https://www.macherjek.at/"><img alt="Macherjek" src="https://img.shields.io/badge/-macherjek.at-10B981?style=flat"></a>
 </p>
 
-## Starter Kits
-
-| Name | Description | Stars |
-|---|---|---|
-| [constructa-starter-min](https://github.com/instructa/constructa-starter-min) | Minimal Tanstack Starter with shadcn, tailwind v4 | 56 |
-| [constructa-starter](https://github.com/instructa/constructa-starter) | AI-First SAAS Starter Kit | 73 |
-| [mcp-starter](https://github.com/instructa/mcp-starter) | A super simple Starter to build your own MCP Server | 30 |
-| [viber3d](https://github.com/instructa/viber3d) | A modern starter kit for 3D browser games powered by r3f and threejs -  | 489 |
-
 ## AI Workflow Tools
 
 | Name | Description | Stars |
@@ -27,6 +18,15 @@ Building AI tools to driving my coding agent to the max.
 | [browser-echo](https://github.com/instructa/browser-echo) | ⚡ Stream browser logs to terminal, zero setup, perfect for Ai Agents | 278 |
 | [codefetch](https://github.com/regenrek/codefetch) | Turn code into Markdown for LLMs with one simple terminal command | 355 |
 | [aidex](https://github.com/regenrek/aidex) | A CLI tool that provides detailed information about AI language models, helping developers choose the right model for their needs. | 38 |
+
+## Starter Kits
+
+| Name | Description | Stars |
+|---|---|---|
+| [constructa-starter-min](https://github.com/instructa/constructa-starter-min) | Minimal Tanstack Starter with shadcn, tailwind v4 | 56 |
+| [constructa-starter](https://github.com/instructa/constructa-starter) | AI-First SAAS Starter Kit | 73 |
+| [mcp-starter](https://github.com/instructa/mcp-starter) | A super simple Starter to build your own MCP Server | 30 |
+| [viber3d](https://github.com/instructa/viber3d) | A modern starter kit for 3D browser games powered by r3f and threejs -  | 489 |
 
 ## MCP Server
 

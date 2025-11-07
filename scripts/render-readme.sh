@@ -74,17 +74,17 @@ Building AI tools to driving my coding agent to the max.
 HDR
 
 # Sections in custom order
-render_section "Starter Kits" \
-  "constructa-starter-min" \
-  "constructer-starter" \
-  "mcp-starter" \
-  "viber3d"
-
 render_section "AI Workflow Tools" \
   "oplink:NEW" \
   "browser-echo" \
   "codefetch" \
   "aidex"
+
+render_section "Starter Kits" \
+  "constructa-starter-min" \
+  "constructer-starter" \
+  "mcp-starter" \
+  "viber3d"
 
 render_section "MCP Server" \
   "deepwiki-mcp"
