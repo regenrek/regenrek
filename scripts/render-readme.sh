@@ -42,19 +42,23 @@ Building AI tools to driving my coding agent to the max.
   <a href="https://www.macherjek.at/"><img alt="Macherjek" src="https://img.shields.io/badge/-macherjek.at-10B981?style=flat"></a>
 </p>
 
-## Personal Projects
 HDR
-echo
-render_table <<< "$MUST_JSON"
-echo
+
+# New section on top (from OPLink repos)
 if [ "$(echo "$OPLINK" | jq 'length')" -gt 0 ]; then
-cat << 'OPL'
-## OPLink
-OPL
+cat << 'NEW'
+## New
+NEW
 echo
 render_table <<< "$OPLINK"
 echo
 fi
+
+cat << 'PERS'
+## Personal Projects
+PERS
+echo
+render_table <<< "$MUST_JSON"
 cat << 'INSTR'
 ## Instructa Highlights
 INSTR

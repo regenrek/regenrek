@@ -10,6 +10,12 @@ Building AI tools to driving my coding agent to the max.
   <a href="https://www.macherjek.at/"><img alt="Macherjek" src="https://img.shields.io/badge/-macherjek.at-10B981?style=flat"></a>
 </p>
 
+## New
+
+| Name | Description | Stars |
+|---|---|---|
+| [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
+
 ## Personal Projects
 
 | Name | Description | Stars |
@@ -18,13 +24,6 @@ Building AI tools to driving my coding agent to the max.
 | [aidex](https://github.com/regenrek/aidex) | A CLI tool that provides detailed information about AI language models, helping developers choose the right model for their needs. | 38 |
 | [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
 | [deepwiki-mcp](https://github.com/regenrek/deepwiki-mcp) | 📖 MCP server for fetch deepwiki.com and get latest knowledge in Cursor and other Code Editors | 1111 |
-
-## OPLink
-
-| Name | Description | Stars |
-|---|---|---|
-| [oplink](https://github.com/regenrek/oplink) | easy workflows for mcp tools | 0 |
-
 ## Instructa Highlights
 
 | Name | Description | Stars |
